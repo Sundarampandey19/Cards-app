@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:isar_test/components/card_widget.dart';
+import 'package:isar_test/components/transaction_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Padding(
             padding: EdgeInsets.only(top: 60),
@@ -36,11 +39,11 @@ class _HomePageState extends State<HomePage> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             controller: controller,
-            child: Row(
+            child: const Row(
               children: [
-                cardWidget(),
-                cardWidget(),
-                cardWidget(),
+                Cardwidget(),
+                Cardwidget(),
+                Cardwidget(),
               ],
             ),
           ),
@@ -48,120 +51,58 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-                ElevatedButton(
-                  onPressed: () {}, 
-                style: ElevatedButton.styleFrom(
+              ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange[300],
-                      minimumSize: const Size(120, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(11),
-                    ),
-                ),
-                         // Adjusted size
-                child: const Row(     
-                  children: [
-                    Icon(Icons.send),
-                    Text("Transfer" )
-                    ],
-                )
-                ),
-                ElevatedButton(onPressed: () {}, 
-                style: ElevatedButton.styleFrom(
                     minimumSize: const Size(120, 50),
-                    backgroundColor: Colors.green[300 ],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(11),
                     ),
                   ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    
-                    Icon(Icons.mail),
-                    SizedBox(width: 8), 
-                    Text("Receive" )
+                  // Adjusted size
+                  child: const Row(
+                    children: [Icon(Icons.send), Text("Transfer")],
+                  )),
+              ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(120, 50),
+                    backgroundColor: Colors.green[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(11),
+                    ),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.mail),
+                      SizedBox(width: 8),
+                      Text("Receive")
                     ],
-                )
-                ),  
-
-
+                  )),
             ],
           ),
           // Recent transactions row
-
-          //Make a column for that
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Recent Transactions"),
+                    Icon(Icons.menu_sharp)
+                  ],
+                ),
+                //Make a column for that
+                Expanded(child: TransactionList())
+              ],
+            ),
+          ),
 
           //Bottom navigation bar
         ],
-      ),
-    );
-  }
-
-  Padding cardWidget() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Container(
-        height: 200,
-        width: 350,
-        decoration: const BoxDecoration(
-            color: Colors.black,
-            border: Border.fromBorderSide(BorderSide()),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: const Padding(
-          padding:  EdgeInsets.all(20.0),
-          child:  Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-                   Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "\$2000",
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    Text(
-                      "VISA",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ],
-                   ),
-                   
-              Row(
-                children: [
-                  Text("4335 **** **** ****", 
-                  style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                  )
-                ],
-              ),
-          
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-          
-                  Text("Debit Card",style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white), ),
-                  Text("09/24" ,style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white),)
-          
-                ],
-              )
-          
-            ],
-          ),
-        ),
       ),
     );
   }
